@@ -1,8 +1,16 @@
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
 public final class SaveTreeFacade {
     private static SaveTreeFacade instance;
+
     public static SaveTreeFacade getInstance() {
         if (instance == null) {
             instance = new SaveTreeFacade();
@@ -14,15 +22,17 @@ public final class SaveTreeFacade {
     }
 
     ObjectMapper mapper = new ObjectMapper();
+
     public String createJson(Tree tree) {
         String result = null;
         try {
             result = mapper.writeValueAsString(tree.getRoot());
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            throw new IllegalArgumentException();
         }
         return result;
     }
+
     public Tree decodeJson(String json) {
         Tree tree = null;
         try {
@@ -35,47 +45,30 @@ public final class SaveTreeFacade {
                 }
             }
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            throw new IllegalArgumentException();
         }
         return tree;
     }
-    /*public File writeTree(Tree tree) {
-        Node root = tree.getRoot();
+
+
+    public void createXml(Tree tree){
         try {
-            DocumentBuilderFactory factory = new DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-
-            Document doc = builder.newDocument();
-            Element rootElement = doc.createElement("Root");
-            doc.appendChild(rootElement);
-
-            rootElement.appendChild(getNode(doc, root));
-
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
+            XMLEncoder encoder = new XMLEncoder(new FileOutputStream("tree.xml"));
+            encoder.writeObject(tree.getRoot());
+            encoder.close();
+        } catch (FileNotFoundException e) {
+            throw new IllegalArgumentException();
         }
-    }
 
-    private static Node getNode(Document doc, Node node){
-        Element element = doc.createElement(node.getType().toString());
-        element.appendChild(getElements(doc, "name", node.getName()));
-        element.appendChild(getElements(doc,"parent", );
-        element.appendChild(getElements(doc, "priority", String.valueOf(node.getPriority())));
-        element.appendChild(get))
-        return element;
     }
-
-    private static Node getElements(Document doc, String name, String value){
-        Element node = doc.createElement(name);
-        node.appendChild(doc.createTextNode(value));
-        return node;
+    public Tree decodeXml(){
+        XMLDecoder decoder = null;
+        try {
+            decoder = new XMLDecoder(new FileInputStream("tree.xml"));
+            decoder.close();
+        } catch (FileNotFoundException e) {
+            throw new IllegalArgumentException();
+        }
+        return new Tree((Node) decoder.readObject());
     }
-*/
-
-//    public Tree readTree(File file) {
-//    }
 }

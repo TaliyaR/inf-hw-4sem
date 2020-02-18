@@ -65,11 +65,24 @@ public class Main {
 //    }
         SaveTreeFacade converter = SaveTreeFacade.getInstance();
         System.out.println();
-        BfsIterator iterator = new BfsIterator(converter.decodeJson(converter.createJson(tree)));
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next().getName());
-        }
+//        BfsIterator iterator = new BfsIterator(converter.decodeJson(converter.createJson(tree)));
+//        while (iterator.hasNext()) {
+//            System.out.println(iterator.next().getName());
+//        }
         //File xmlFile = converter.writeTree(tree);
+//        converter.createXml(tree);
+        Tree tree1 = converter.decodeXml();
+        BfsPriorityIterator iteratorPriority = new BfsPriorityIterator(tree1);
+        while (iteratorPriority.hasNext()){
+            System.out.print(iteratorPriority.next());
+        }
+
+
+
+        Interpreter interpreter = new Interpreter();
+        interpreter.returnChildren("return children REGION Tatarstan", tree);
+
+
 
     }
 }
