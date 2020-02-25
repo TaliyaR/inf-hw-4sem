@@ -1,3 +1,5 @@
+package patterns;
+
 import java.io.IOException;
 
 public class Main {
@@ -46,26 +48,26 @@ public class Main {
         Tree tree = new Tree(root);
 //
 
-//        BfsIterator iterator = new BfsIterator(tree);
+//        patterns.BfsIterator iterator = new patterns.BfsIterator(tree);
 //        while (iterator.hasNext()){
 //            System.out.print(iterator.next());
 //        }
 //        System.out.println();
 //
-//        BfsPriorityIterator iteratorPriority = new BfsPriorityIterator(tree);
+//        patterns.BfsPriorityIterator iteratorPriority = new patterns.BfsPriorityIterator(tree);
 //        while (iteratorPriority.hasNext()){
 //            System.out.print(iteratorPriority.next());
 //        }
 //        System.out.println();
 //
-//        DfsIterator dfsIterator = new DfsIterator(tree);
+//        patterns.DfsIterator dfsIterator = new patterns.DfsIterator(tree);
 //        while (dfsIterator.hasNext()){
 //            System.out.print(dfsIterator.next());
 //        }
 //    }
         SaveTreeFacade converter = SaveTreeFacade.getInstance();
         System.out.println();
-//        BfsIterator iterator = new BfsIterator(converter.decodeJson(converter.createJson(tree)));
+//        patterns.BfsIterator iterator = new patterns.BfsIterator(converter.decodeJson(converter.createJson(tree)));
 //        while (iterator.hasNext()) {
 //            System.out.println(iterator.next().getName());
 //        }

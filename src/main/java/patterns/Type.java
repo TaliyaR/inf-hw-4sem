@@ -1,3 +1,5 @@
+package patterns;
+
 public enum Type {
     COUNTRY,
     REGION,

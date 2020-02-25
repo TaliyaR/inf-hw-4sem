@@ -1,3 +1,5 @@
+package patterns;
+
 public class Interpreter {
 
 
@@ -17,7 +19,7 @@ public class Interpreter {
         if (foundNode != null) {
             System.out.println(foundNode.getChildrens().toString());
         } else {
-            System.out.println("Node not found");
+            System.out.println("patterns.Node not found");
         }
     }
 

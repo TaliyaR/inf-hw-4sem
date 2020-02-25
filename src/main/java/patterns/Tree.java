@@ -1,3 +1,5 @@
+package patterns;
+
 public class Tree {
     private Node root;
 

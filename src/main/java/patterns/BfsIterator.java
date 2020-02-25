@@ -1,3 +1,5 @@
+package patterns;
+
 import java.util.*;
 
 //Перечисляет элементы как поиск в ширину.  По уровням сверху вниз
@@ -13,7 +15,7 @@ public class BfsIterator implements Iterator {
     }
 
 //    @Override
-//    public Node next() {
+//    public patterns.Node next() {
 //        if (!hasNext()) {
 //            throw new NoSuchElementException();
 //        } else {
