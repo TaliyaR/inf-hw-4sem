@@ -34,7 +34,7 @@ public class InterpreterImpl implements Interpreter {
     private Integer copy(String id) {
         TaskInterface taskInterface = taskManager.getTaskById(Integer.parseInt(id));
         if (taskInterface != null) {
-            TaskInterface newTask = (TaskInterface) taskInterface.copy();
+            TaskInterface newTask = taskInterface.copy();
             taskManager.addTask(newTask);
             return newTask.getId();
         } else {
@@ -92,7 +92,7 @@ public class InterpreterImpl implements Interpreter {
     }
 
     private void newTask(String[] command) {
-        Attribute argument = Attribute.builder().text(command[0]).build();
+        Attribute argument = Attribute.builder().text(command[1]).build();
         taskManager.addTask(new ProxyTask(argument));
     }
 }

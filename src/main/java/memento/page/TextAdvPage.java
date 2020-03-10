@@ -1,4 +1,21 @@
 package memento.page;
 
-public class TextAdvPage {
+import java.util.ArrayList;
+
+public class TextAdvPage extends Page {
+    private String name;
+    private ArrayList<Page> links;
+    private Integer curPos = 0;
+
+    @Override
+    public Page goToAd() {
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return "TextAdvPage{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

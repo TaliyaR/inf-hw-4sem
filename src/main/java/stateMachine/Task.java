@@ -30,7 +30,7 @@ public class Task implements TaskInterface{
 
     private Task(Task task) {
         this.state = task.state.copy(this);
-        this.id = task.id;
+        this.id = IdGenerator.getId();
         this.developerId = task.developerId;
         this.testerId = task.testerId;
         this.text = task.text;

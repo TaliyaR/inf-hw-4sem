@@ -22,7 +22,10 @@ public class InterpreterImpl implements Interpreter {
         } else if (str.startsWith("forward")) {
             browser.forward();
         } else if (str.startsWith("gotoposition")){
-
+            String[] command = str.split(" ");
+            browser.goToPosition(Integer.parseInt(command[1]));
+        }else if(str.startsWith("gotoAd")){
+            browser.goToAd();
         }
     }
 }

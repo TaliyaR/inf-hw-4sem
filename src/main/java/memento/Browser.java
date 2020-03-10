@@ -9,14 +9,6 @@ public class Browser {
 
     public Browser() {
         this.history = new History();
-//        ArrayList<Page> links = new ArrayList<>();
-//        links.add(new Page("Site1"));
-//        links.add(new Page("Site2"));
-//        links.add(new Page("Site3"));
-//        links.add(new Page("Site4"));
-
-//        this.currentPage = new Page("Page1", links);
-//        history.push(new Memento(this, currentPage));
     }
 
     public Page getCurrentPage() {
@@ -34,7 +26,7 @@ public class Browser {
     //стек forward пустой
     public void goTo(String name){
         currentPage = new Page(name);
-        history.push(new Memento(this, currentPage));
+        history.push(save());
         history.clearForwardStack();
         System.out.println("go to " + name);
     }
@@ -43,7 +35,7 @@ public class Browser {
     public void link(String name){
         if(currentPage.hasLink(name)){
             currentPage = new Page(name);
-            history.push(new Memento(this, currentPage));
+            history.push(save());
             history.clearForwardStack();
             System.out.println("link to " + name);
         }else {
@@ -51,9 +43,25 @@ public class Browser {
         }
     }
 
+    public void goToPosition(Integer position) {
+        if (!currentPage.changePosition(position)) {
+            System.out.println("Неправильная позиция");
+        }
+    }
+
+    public void goToAd() {
+        Page page;
+        if ((page = currentPage.goToAd()) != null) {
+            history.push(save());
+            currentPage = page;
+        } else {
+            System.out.println("нет ads");
+        }
+    }
+
     //восстановление состояния в снимке
-    private void restore(Page page){
-        currentPage = page;
+    private void restore(Page simplePage){
+        currentPage = simplePage;
     }
 
     //сохранение состояния в снимке
@@ -63,16 +71,16 @@ public class Browser {
 
     class Memento {
         private Browser browser;
-        private Page currentPage;
+        private Page currentSimplePage;
 
-        public Memento(Browser browser, Page currentPage) {
+        public Memento(Browser browser, Page currentSimplePage) {
             this.browser = browser;
-            this.currentPage = currentPage;
+            this.currentSimplePage = currentSimplePage;
         }
 
         //восстановление состояния браузера
         public void restore(){
-            browser.restore(currentPage);
+            browser.restore(currentSimplePage);
         }
     }
 }

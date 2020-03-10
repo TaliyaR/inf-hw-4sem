@@ -1,34 +1,23 @@
 package memento.page;
 
-
 import java.util.ArrayList;
+import lombok.*;
 
 
-public class Page {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public abstract class Page {
     private String name;
     private ArrayList<Page> links;
+    private Integer curPos = 0;
 
     public Page(String name) {
         this.name = name;
     }
 
-    public Page(String name, ArrayList<Page> links) {
-        this.name = name;
-        this.links = links;
-    }
-
-    public Boolean hasLink(String name) {
-        if (!(links == null)) {
-            for (Page p : links) {
-                if ((p.name).equals(name)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        return false;
-    }
-
+    public abstract Page goToAd();
 
     @Override
     public String toString() {
